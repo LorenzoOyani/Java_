@@ -67,23 +67,23 @@ public class ClientHandler implements Runnable {
     }
 
     public boolean executeCommand(String messageClient) throws IOException {
-        if (messageClient.equalsIgnoreCase(userName + ": /quit")) {
+        if (messageClient.equalsIgnoreCase(STR."\{userName}: /quit")) {
             closeEverything();
             return false;
         }
-        if (messageClient.equalsIgnoreCase(userName + ": /list")) {
+        if (messageClient.equalsIgnoreCase(STR."\{userName}: /list")) {
             executeListCommand();
             return true;
         }
-        if (messageClient.contains(userName + ": /whisper")) {
+        if (messageClient.contains(STR."\{userName}: /whisper")) {
             executeWhisperCommand(messageClient);
             return true;
         }
-        if (messageClient.contains(userName + ":/name")) {
+        if (messageClient.contains(STR."\{userName}:/name")) {
             executeNameCommand(messageClient);
             return true;
         }
-        if (messageClient.equalsIgnoreCase(userName + " /help")) {
+        if (messageClient.equalsIgnoreCase(STR."\{userName} /help")) {
             executeHelpCommand();
             return true;
         }
@@ -107,6 +107,7 @@ public class ClientHandler implements Runnable {
                 client.writer.println(whisper);
             }
         }
+
 
     }
 

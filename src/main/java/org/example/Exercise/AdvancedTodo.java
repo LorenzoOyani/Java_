@@ -25,7 +25,6 @@ public class AdvancedTodo {
             int i = 1;
             for (String task : todolist) {
                 System.out.println(i + "." + task);
-                i++;
             }
         }
 

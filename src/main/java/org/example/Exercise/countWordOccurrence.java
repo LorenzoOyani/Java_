@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 public class countWordOccurrence {
     public static void main(String[] args) throws ClassCastException {
-        String text = "The Premier league is just as corrupt as La-liga, The bundesliga is a tinpot league.";
+        String text = "The Premier league is just as corrupt as La-Liga, The bundesliga is a tinpot league.";
         Map<String, Integer> map = new TreeMap<>();
 //        Set<String> list = new TreeSet<>();
         String[] word = text.split(".,;:!?");

@@ -9,12 +9,14 @@ import java.util.Arrays;
 public class AverageSubArray {
     public static double[] subArray(int k, double[] arr) {
         double[] result = new double[arr.length - k + 1];
-        for (int i = 0; i <= arr.length - k; i++) {
+        int sum = 0;
+        int i = 0;
+        for (; i <= arr.length -k; i++) {
+            sum += (int) arr[i];
 
-            double sum = 0;
-            for (int j = i; j < i + k; j++) {
-                sum += arr[j];
-                result[j] = sum / k;
+            for (int j = i; j <= i + k; j++) {
+                result[j] = (double) sum / k;
+                result[sum] = arr[j];
             }
         }
         return result;

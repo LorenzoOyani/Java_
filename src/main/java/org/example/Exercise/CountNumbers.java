@@ -27,11 +27,7 @@ public class CountNumbers {
             }
         }
     }while(value != 0);
-    int max = Collections.max(maps.keySet());
-        Set<Map<Integer, Integer>> list = new HashSet<>();
-        for (Map<Integer, Integer> entries : list) {
-//        Integer.parseInt(entries.get(i))
-        }
+
         }
 
     }
