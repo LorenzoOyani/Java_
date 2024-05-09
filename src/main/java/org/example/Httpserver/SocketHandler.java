@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class SocketHandler implements Runnable {
 
-    private Handler defualtHandler;
     private final Socket socket;
+    private Handler defualtHandler;
     private Map<String, Map<String, Handler>> handlers = new HashMap<>();
 
     SocketHandler(Socket socket, Map<String, Map<String, Handler>> handlers) {
@@ -23,6 +23,7 @@ public class SocketHandler implements Runnable {
 
     }
 
+
     @Override
     public void run() {
         BufferedReader in = null;
@@ -33,52 +34,48 @@ public class SocketHandler implements Runnable {
 
             Request request = new Request(in);
             if (!request.parse()) {
-                respond(500, "server error: cant parse the requested URL", out);
+                respond(500, "unable to parse the request", out);
                 return;
             }
             Response response = new Response(out);
-            boolean foundHandler = false;
             Map<String, Handler> methodHandlers = handlers.get(request.getMethod());
             if (methodHandlers == null) {
-                respond(405, "Method not supported", out);
+                respond(405, "method specified not allowed", out);
                 return;
             }
-            for (String handlerPath : handlers.keySet()) { /* Return non-null key*/
-                if (handlerPath.equals(request.getPath())) {
+            boolean foundPath = false;
+            for (String handlePath : methodHandlers.keySet()) {
+                if (handlePath.equals(request.getPath())) {
                     methodHandlers.get(request.getPath()).Handle(request, response);
                     response.send();
-                    foundHandler = true;
+                    foundPath = true;
                     break;
+
                 }
 
             }
-            if (!foundHandler) {
+            if (!foundPath) {
                 if (methodHandlers.get("/*") != null) {
                     methodHandlers.get("/*").Handle(request, response);
                     response.send();
+
                 } else {
-                    respond(404, "requested page not found", out);
+                    respond(404, "server cant find request path", out);
                 }
-
             }
-
 
         } catch (IOException e) {
             try {
-                e.printStackTrace();
-                if (socket != null) {
-                    assert out != null;
-                    respond(500, "internal server error", out);
-
-                }
+                if (socket != null) socket.close();
+                respond(500, "internal server error", out);
             } catch (IOException e1) {
                 try {
                     e1.printStackTrace();
                     if (socket != null) socket.close();
-                    if (in != null) in.close();
                     if (out != null) out.close();
-                } catch (IOException e3) {
-                    e3.printStackTrace();
+                    if (in != null) in.close();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
                 }
             }
         }

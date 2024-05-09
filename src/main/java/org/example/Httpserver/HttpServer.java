@@ -21,25 +21,27 @@ public class HttpServer {
     }
 
     public void addHandler(String method, String path, Handler handler) {
-        Map<String, Handler> methodHandlers = handlers.get(method);
+       Map<String, Handler> methodHandlers = handlers.get(method);
         if (methodHandlers == null) {
             methodHandlers = new HashMap<>();
-            handlers.put(method, methodHandlers);
-
+            handlers.put(method, methodHandlers );
         }
         methodHandlers.put(path, handler);
     }
 
     public void start() throws IOException {
-        ServerSocket server = new ServerSocket(port);
-        System.out.println("server up and running...");
-        Socket client;
-        while ((client = server.accept()) != null) {
-            System.out.println(STR."Receving connections from \{client.getRemoteSocketAddress().toString()}");
-            SocketHandler socketHandler = new SocketHandler(client, handlers);
-            Thread thread = new Thread(socketHandler);
-            thread.start();
+
+        try(ServerSocket server = new ServerSocket(port)){
+            System.out.println("server up and running...");
+            Socket client;
+            while ((client = server.accept()) != null) {
+                System.out.println(STR."Receving connections from \{client.getRemoteSocketAddress().toString()}");
+                SocketHandler socketHandler = new SocketHandler(client, handlers);
+                Thread thread = new Thread(socketHandler);
+                thread.start();
+            }
         }
+
 
     }
 
@@ -48,7 +50,7 @@ public class HttpServer {
         server.addHandler("/GET", "/hello", new Handler() {
             @Override
             public void Handle(Request request, Response response) {
-                String html = "Requested url worked "+ request.getQueryParameters("http:/www.facebook.com");
+                String html = STR."Requested url worked \{request.getQueryParameters("http:/www.facebook.com")}";
                 response.setResponseCode(200, "ok");
                 response.addHeader("content-type", "text/html");
                 response.addBody(html);

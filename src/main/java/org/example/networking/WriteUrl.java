@@ -26,7 +26,7 @@ public class WriteUrl {
         out.close();
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-        String line;
+        String line ;
         while ((line = bufferedReader.readLine()) != null) {
             System.out.println(line);
         }

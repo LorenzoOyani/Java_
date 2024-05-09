@@ -10,7 +10,7 @@ public class MaxNumber {
         }
         Number max = list.getFirst();
         for (int i = 0; i < list.size(); i++) {
-            if (max.doubleValue() < list.get(i).doubleValue()) {
+            if (max.doubleValue() > list.get(i).doubleValue()) {
                 max = list.get(i);
             }
         }

@@ -17,7 +17,7 @@ public class RootHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        String response = "<h1>Server started, if you see this message</h1>" + "server started at " + "<h1>" + port + "</h1>";
+        String response = STR."<h1>Server started, if you see this message</h1>server started at <h1>\{port}</h1>";
         exchange.sendResponseHeaders(200, response.length());
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());

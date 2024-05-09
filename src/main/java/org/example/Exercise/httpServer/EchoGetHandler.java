@@ -14,7 +14,6 @@ public class EchoGetHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         Map<String, Object> parameters = new HashMap<>();
         URI requestUri = exchange.getRequestURI();
-        // query the Requested URI string.
         String query = requestUri.getRawQuery();
         ParseQuery.parseQuery(query, parameters);
 

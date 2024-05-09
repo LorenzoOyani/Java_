@@ -2,7 +2,10 @@ package org.example.Count;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UncheckedIOException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CountKayJavaFile {
     public static void main(String[] args) throws Exception {
@@ -45,7 +48,7 @@ public class CountKayJavaFile {
 
     }
 
-    static Set<String> getKeywords() {
+    static Set<String> getKeywords() throws UncheckedIOException {
         String[] keywordString = {"abstract", "assert", "boolean",
                 "break", "byte", "case", "catch", "char", "class", "const",
                 "continue", "default", "do", "double", "else", "enum",
@@ -56,6 +59,7 @@ public class CountKayJavaFile {
                 "strictfp", "super", "switch", "synchronized", "this",
                 "throw", "throws", "transient", "try", "void", "volatile",
                 "while", "true", "false", "null"};
+
 
         return new HashSet<String>(Arrays.asList(keywordString));
     }

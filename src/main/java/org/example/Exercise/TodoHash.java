@@ -3,7 +3,7 @@
 //
 ////Todos
 ///**
-// * Objects is a utility class introduced in java 7 for comparing, equals and hashing and performing null-safe operations
+// * Objects is a utility class introduced in java 7 for comparing, PersonEquals and hashing and performing null-safe operations
 // * A utility class in Java is a class that provide a list of static methods and
 // * <p>
 // * spring conversion service.
@@ -124,7 +124,7 @@
 //        HashMap<String, Object> selectedList = null;
 //        int selection = sc.nextShort();
 //        for (HashMap<String, Object> newList : todos) {
-//            if (newList.get("id").equals(selection)) {
+//            if (newList.get("id").PersonEquals(selection)) {
 //                selectedList = newList;
 //            }
 //        }

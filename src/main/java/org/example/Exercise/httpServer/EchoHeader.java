@@ -21,7 +21,7 @@ An immutable request Headers can be created to get the headers containing key/va
 public class EchoHeader implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        Headers headers = exchange.getRequestHeaders(); // get the requested Headers.
+        Headers headers = exchange.getRequestHeaders(); // get the requested Headers of keys/value pairs.
         Set<Map.Entry<String, List<String>>> entry = headers.entrySet();
         String response = "";
         for (Map.Entry<String, List<String>> entries : entry) {

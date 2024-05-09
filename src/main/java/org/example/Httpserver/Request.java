@@ -97,7 +97,7 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request{headers=" + headers.toString() + ", path='" + path + "', method='" + method + "'}";
+        return STR."Request{headers=\{headers}, path='\{path}', method='\{method}'}";
 
     }
 }

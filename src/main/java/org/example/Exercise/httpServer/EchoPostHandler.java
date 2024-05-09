@@ -17,18 +17,18 @@ public class EchoPostHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         Map<String, Object> parameters = new HashMap<>();
-        InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8);
-        BufferedReader reader = new BufferedReader(isr);
-        String query = reader.readLine();
+        InputStreamReader reader = new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8);
+        BufferedReader isr = new BufferedReader(reader);
+        String query = isr.readLine();
         parseQuery(query, parameters);
 
         String response = "";
-        for (String key : parameters.keySet()) {
-            response = STR."\{key}=\{parameters.get(key)}";
+        for (String param : parameters.keySet()) {
+            response = STR."\{param}:\{parameters.get(param)}";
         }
         exchange.sendResponseHeaders(200, response.length());
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
+        OutputStream out = exchange.getResponseBody();
+        out.write(response.getBytes());
+        out.close();
     }
 }

@@ -36,7 +36,7 @@ public class FileSeparators {
         }
         String[] path = new String[psCount + 1];
         int pathStart = 0;
-        for (int j = 0; j < pathLength; j++) {
+        for (int j = 0; j < path.length; j++) {
             int pathEnd = paths.indexOf(ps, pathStart);
             path[j] = (pathStart < pathEnd) ? paths.substring(pathStart, pathEnd) : ".";
             pathStart = pathEnd + 1;
